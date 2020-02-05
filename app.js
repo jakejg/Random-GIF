@@ -10,10 +10,15 @@ search.value = ""
 })
 
 async function getGify(search){
+    try{
 const response = await axios.get("http://api.giphy.com/v1/gifs/search", {params: {api_key:"4EgGAYqbRvW88AishbuvZ0rOjdBbN66r", q: search, limit: 1}})
 
 createContainer(search)
 addGif(response)
+    }
+    catch(e){
+        alert("GIF not found")
+    }
 }
 
 function createContainer(search){
@@ -33,10 +38,8 @@ function addGif(response){
 
 const remove = document.querySelector('#remove')
 remove.addEventListener('click', () => {
-  const test = Array.from(row.children)
-  console.log(test)
-   for (let div of test){
-       console.log(div)
+  const currGifs = Array.from(row.children)
+   for (let div of currGifs){
        div.remove();
    }
 })
